@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AyurBot Chat</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-bottom: 2px solid #007bff;
+            outline: none;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .send-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Welcome to AyurBot Chat</h1>
+        <p>Improve Your Health with Personalized Ayurvedic Insights</p>
+        <form action="/chat" method="POST">
+            <input type="text" name="user_input" class="message-input" placeholder="Tell us your concern...">
+            <button type="submit" class="send-button">Start Chat</button>
+        </form>
+    </div>
+</body>
+</html>

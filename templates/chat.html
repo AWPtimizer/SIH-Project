@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AyurBot Chat</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-bottom: 2px solid #007bff;
+            outline: none;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .send-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* CSS for user and bot messages */
+        .message-history {
+            max-height: 400px; /* Set a maximum height for message history */
+            overflow-y: auto; /* Add scrollbars when needed */
+        }
+
+        .message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 15px; /* Rounded message containers */
+            clear: both; /* Clear floats to properly align messages */
+        }
+
+        .user-message {
+            background-color: #007bff;
+            color: #fff;
+            text-align: right;
+            margin-left: auto; /* Push user messages to the right */
+        }
+
+        .bot-message {
+            background-color: #4caf50;
+            color: #fff;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Welcome to AyurBot Chat</h1>
+        <p>Improve Your Health with Personalized Ayurvedic Insights</p>
+        <div class="message-history" id="message-history">
+            {% for message in chat_history %}
+                <div class="message {% if message.role == 'user' %}user-message{% else %}bot-message{% endif %}">
+                    {{ message.content }}
+                </div>
+            {% endfor %}
+        </div>
+        <form action="/chat" method="POST" id="chat-form">
+            <input type="text" name="user_input" class="message-input" placeholder="Tell us your concern...">
+            <button type="submit" class="send-button">Send</button>
+        </form>
+    </div>
+
+    <!-- JavaScript to keep the chat scrolled to the last user message -->
+    <script>
+        // Function to scroll the chat container to the last user message
+        function scrollToLastUserMessage() {
+            var chatHistory = document.getElementById('message-history');
+            var userMessages = chatHistory.querySelectorAll('.user-message');
+            if (userMessages.length > 0) {
+                var lastUserMessage = userMessages[userMessages.length - 1];
+                chatHistory.scrollTop = lastUserMessage.offsetTop;
+            }
+        }
+
+        // Call scrollToLastUserMessage when the page loads
+        window.onload = scrollToLastUserMessage;
+
+        // Call scrollToLastUserMessage after submitting a new message
+        document.getElementById('chat-form').addEventListener('submit', function () {
+            setTimeout(scrollToLastUserMessage, 100); // Delayed to ensure it scrolls to the last user message
+        });
+    </script>
+
+</body>
+</html>
